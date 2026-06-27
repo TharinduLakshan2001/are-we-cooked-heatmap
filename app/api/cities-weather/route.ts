@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { fetchAllEuropeanWeather } from "@/lib/cityWeather";
 
-export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {

@@ -3,6 +3,7 @@ import "./globals.css";
 import { SufferingProvider } from "@/lib/SufferingContext";
 import { AmbientProvider } from "@/lib/AmbientActivityContext";
 import SubmitPainModal from "@/components/SubmitPainModal";
+import BuyMeIceCreamModal from "@/components/BuyMeIceCreamModal";
 
 export const metadata: Metadata = {
   title: "Heat Map — Where Europe is dying right now.",
@@ -22,6 +23,7 @@ export default function RootLayout({
           <AmbientProvider>
             {children}
             <SubmitPainModal />
+            <BuyMeIceCreamModal />
           </AmbientProvider>
         </SufferingProvider>
       </body>

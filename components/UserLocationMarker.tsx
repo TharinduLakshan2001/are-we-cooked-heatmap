@@ -109,12 +109,15 @@ export default function UserLocationMarker() {
 
     const onSuccess = (pos: GeolocationPosition) => {
       const { latitude: lat, longitude: lng } = pos.coords;
+      const isFirstLock = coordsRef.current === null;
       coordsRef.current = { lat, lng };
       _userLat = lat;
       _userLng = lng;
       _hasPosition = true;
       updateDot(lat, lng);
-      fetchWeather(lat, lng);
+      if (isFirstLock) {
+        fetchWeather(lat, lng);
+      }
     };
 
     /* Try browser geolocation first */

@@ -29,7 +29,7 @@ export async function fetchAllEuropeanWeather(): Promise<CityWeatherRaw[]> {
   });
 
   const url = `${OPEN_METEO_FORECAST}?${params}`;
-  const res = await fetch(url, { next: { revalidate: 1800 } });
+  const res = await fetch(url, { next: { revalidate: 60 } });
 
   if (!res.ok) {
     const text = await res.text().catch(() => "");

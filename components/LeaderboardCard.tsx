@@ -27,7 +27,7 @@ export default function LeaderboardCard() {
   const fetchLeaderboard = useCallback(() => {
     setLoading(true);
     setError(null);
-    fetch("/api/cities-weather")
+    fetch("/api/cities-weather?t=" + Date.now())
       .then((r) => {
         if (!r.ok) throw new Error("Failed to load");
         return r.json();
@@ -102,7 +102,7 @@ export default function LeaderboardCard() {
                       c.cold ? "text-frost" : "text-ember"
                     }`}
                   >
-                    {Math.round(c.percent)}%
+                    {c.tempC.toFixed(1)}°C
                   </span>
                 </div>
               ))}

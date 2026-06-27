@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useSuffering } from "@/lib/SufferingContext";
 
 export default function HeaderTools() {
-  const [clicked, setClicked] = useState(false);
+  const { openIceCreamModal } = useSuffering();
 
   return (
     <button
-      onClick={() => setClicked(true)}
+      onClick={openIceCreamModal}
       className="group relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border border-frost/30 bg-gradient-to-r from-panel via-panel to-[#0e252c] p-4 text-left transition-all duration-300 hover:border-frost/50 hover:shadow-[0_0_24px_-6px_rgba(91,216,224,0.25)] active:scale-[0.99] cursor-pointer"
     >
       {/* Glow Effect behind */}
@@ -21,10 +21,10 @@ export default function HeaderTools() {
       {/* Text column */}
       <div className="flex flex-col min-w-0">
         <span className="relative font-display text-sm font-black tracking-tight text-frost uppercase leading-tight">
-          {clicked ? "Thanks, you legend! 💙" : "Buy me an Ice Creem"}
+          Buy me an Ice Creem
         </span>
         <span className="relative text-[11px] text-frost/70 font-medium leading-tight mt-0.5 truncate">
-          {clicked ? "Keep Europe cool! 🧊" : "Keep the servers sweating, not melting."}
+          Keep the servers sweating, not melting.
         </span>
       </div>
 

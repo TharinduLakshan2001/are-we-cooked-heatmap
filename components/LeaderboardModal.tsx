@@ -51,7 +51,7 @@ export default function LeaderboardModal({
   useEffect(() => {
     if (!isOpen) return;
     dispatch({ type: "start" });
-    fetch("/api/cities-weather")
+    fetch("/api/cities-weather?t=" + Date.now())
       .then((r) => {
         if (!r.ok) throw new Error("Failed to load");
         return r.json();
@@ -180,8 +180,8 @@ function LeaderRow({ city }: { city: LeaderEntry }) {
             <span className="text-sm">{city.flag}</span>
             <span className="truncate">{city.name}</span>
           </span>
-          <span className="shrink-0 text-xs font-bold">
-            {Math.round(city.percent)}%
+          <span className={`shrink-0 text-xs font-bold ${city.cold ? "text-frost" : "text-ember"}`}>
+            {city.tempC.toFixed(1)}°C
           </span>
         </div>
         <div className="mt-0.5 h-1 w-full overflow-hidden rounded-full bg-white/5">

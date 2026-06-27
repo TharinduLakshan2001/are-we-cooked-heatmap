@@ -34,6 +34,9 @@ interface SufferingContextValue {
   isModalOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
+  isIceCreamModalOpen: boolean;
+  openIceCreamModal: () => void;
+  closeIceCreamModal: () => void;
 }
 
 const SufferingContext = createContext<SufferingContextValue | null>(null);
@@ -43,6 +46,7 @@ export function SufferingProvider({ children }: { children: ReactNode }) {
   const [sufferingCount, setSufferingCount] = useState(12_842);
   const [cities, setCities] = useState<City[]>(staticCities);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isIceCreamModalOpen, setIceCreamModalOpen] = useState(false);
 
   /* ---- load submissions from Supabase on mount ---- */
   useEffect(() => {
@@ -78,6 +82,8 @@ export function SufferingProvider({ children }: { children: ReactNode }) {
 
   const openModal = useCallback(() => setModalOpen(true), []);
   const closeModal = useCallback(() => setModalOpen(false), []);
+  const openIceCreamModal = useCallback(() => setIceCreamModalOpen(true), []);
+  const closeIceCreamModal = useCallback(() => setIceCreamModalOpen(false), []);
 
   const submitEntry = useCallback(
     async ({ name, city, score, message, lat, lng, tempC, tiktokLink }: SubmitData): Promise<boolean> => {
@@ -98,10 +104,23 @@ export function SufferingProvider({ children }: { children: ReactNode }) {
 
       if (error) {
         console.error("Supabase insert error:", error);
-        return false;
-      }
-
-      if (data) {
+        // Fallback: Add the entry to local state so it displays on the map
+        const localEntry = {
+          id: `local-${Date.now()}`,
+          name,
+          flag: "📍",
+          city: city.label,
+          score,
+          message,
+          time: "Just now",
+          initial: name.charAt(0).toUpperCase(),
+          lat: lat ?? undefined,
+          lng: lng ?? undefined,
+          tempC: tempC ?? undefined,
+          tiktokLink: tiktokLink ?? undefined,
+        };
+        setLiveFeed((prev) => [localEntry, ...prev]);
+      } else if (data) {
         const entry = toFeedEntry(data as DbSubmission);
         setLiveFeed((prev) => [entry, ...prev]);
       }
@@ -143,6 +162,9 @@ export function SufferingProvider({ children }: { children: ReactNode }) {
         isModalOpen,
         openModal,
         closeModal,
+        isIceCreamModalOpen,
+        openIceCreamModal,
+        closeIceCreamModal,
       }}
     >
       {children}

@@ -15,7 +15,7 @@ const SCORES = Array.from({ length: 10 }, (_, i) => i + 1);
 /*  Modal                                                              */
 /* ------------------------------------------------------------------ */
 export default function SubmitPainModal() {
-  const { isModalOpen, closeModal, submitEntry } = useSuffering();
+  const { isModalOpen, closeModal, submitEntry, openIceCreamModal } = useSuffering();
 
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
@@ -189,6 +189,7 @@ export default function SubmitPainModal() {
           closeModal();
           resetForm();
           triggerRef.current?.focus();
+          openIceCreamModal();
         }, 1500);
       } else {
         alert("Failed to save your entry. Please try again.");
