@@ -120,3 +120,22 @@ describe("Supabase persistence", () => {
     });
   }, 15000);
 });
+
+describe("Open-Meteo weather fetching", () => {
+  it("fetches real-time weather from Open-Meteo and parses it correctly", async () => {
+    const { fetchAllEuropeanWeather } = await import("@/lib/cityWeather");
+    const data = await fetchAllEuropeanWeather();
+
+    expect(Array.isArray(data)).toBe(true);
+    expect(data.length).toBeGreaterThan(0);
+
+    const first = data[0];
+    expect(first.id).toBeDefined();
+    expect(first.name).toBeDefined();
+    expect(first.flag).toBeDefined();
+    expect(first.country).toBeDefined();
+    expect(typeof first.tempC).toBe("number");
+
+    console.log(`[TEST INFO] Verified Open-Meteo real-time weather! Example: ${first.name} is currently ${first.tempC}°C.`);
+  }, 15000);
+});
