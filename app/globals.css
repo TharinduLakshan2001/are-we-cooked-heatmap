@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+:root {
+  --void: #0a0a10;
+  --panel: #121319;
+  --panel-2: #181a23;
+  --line: rgba(255, 255, 255, 0.07);
+  --ember: #ff4d2e;
+  --ember-2: #ff7a1a;
+  --crimson: #ff2d6b;
+  --gold: #ffb627;
+  --frost: #5bd8e0;
+  --ink: #f4f5f9;
+  --mist: #8d90a6;
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-ember: var(--ember);
+  --color-ember-2: var(--ember-2);
+  --color-crimson: var(--crimson);
+  --color-gold: var(--gold);
+  --color-frost: var(--frost);
+  --color-ink: var(--ink);
+  --color-mist: var(--mist);
+  --font-display: "Helvetica Neue", Arial, ui-sans-serif, sans-serif;
+  --font-body: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+}
+
+html,
+body {
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+* {
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- Signature: pulsing live heat pins ---- */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+.pulse-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: currentColor;
+  animation: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.78;
+  }
+}
+.flicker {
+  animation: flicker 2.6s ease-in-out infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.5s ease-out both;
+}
+
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.heat-grid {
+  background-image: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.06) 0.5px,
+      transparent 0.5px
+    );
+  background-size: 22px 22px;
+}
+
+@keyframes count-tick {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-count-tick {
+  animation: count-tick 0.4s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-ring::before,
+  .flicker,
+  .rise,
+  .animate-count-tick {
+    animation: none !important;
+  }
+}
+
+/* ---- Leaflet city marker overrides ---- */
+.city-marker-wrapper {
+  background: none !important;
+  border: none !important;
+}
+
+.city-marker-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.city-marker-avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.city-marker-avatar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--ring-color);
+  animation: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+.city-marker-label {
+  margin-top: 6px;
+  border-radius: 12px;
+  padding: 5px 10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.city-glow-ember {
+  filter: blur(28px);
+  background: rgba(255, 77, 46, 0.2);
+}
+
+.city-glow-frost {
+  filter: blur(28px);
+  background: rgba(91, 216, 224, 0.2);
+}
