@@ -4,6 +4,7 @@ import { Flame, Music2 } from "lucide-react";
 import { useSuffering } from "@/lib/SufferingContext";
 import { SWEAT_DANCE_TIKTOK_URL } from "./Sidebar";
 import LeaderboardCard from "./LeaderboardCard";
+import HeaderTools from "./HeaderTools";
 
 export default function RightRail() {
   const { openModal } = useSuffering();
@@ -49,6 +50,9 @@ export default function RightRail() {
           OPEN TIKTOK
         </a>
       </div>
+
+      {/* Buy me an Ice Cream */}
+      <HeaderTools />
     </aside>
   );
 }

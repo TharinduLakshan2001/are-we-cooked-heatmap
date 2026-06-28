@@ -1,7 +1,6 @@
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import EuropeCookedIndex from "@/components/EuropeCookedIndex";
-import HeaderTools from "@/components/HeaderTools";
 import MapPanel from "@/components/MapPanel";
 import RightRail from "@/components/RightRail";
 import LiveFeed from "@/components/LiveFeed";
@@ -24,9 +23,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Column 2: Buy me an Ice Creem & Right Rail */}
+          {/* Column 2: Right Rail */}
           <div className="flex flex-col gap-3.5 sm:gap-5 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:h-full">
-            <HeaderTools />
             <RightRail />
           </div>
 
