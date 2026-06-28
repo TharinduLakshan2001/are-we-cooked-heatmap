@@ -81,12 +81,10 @@ export default async function CityDetailPage({
 
   return (
     <div className="flex h-screen w-full overflow-hidden bg-void">
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-      </head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
       <Sidebar />
 
