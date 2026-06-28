@@ -15,17 +15,17 @@ export default function Home() {
       <div className="flex min-w-0 flex-1 flex-col overflow-y-auto">
         <MobileNav />
 
-        <div className="grid grid-cols-1 gap-4 p-4 sm:p-5 lg:grid-cols-[1fr_21rem] lg:gap-5 lg:p-6">
+        <div className="grid grid-cols-1 gap-3.5 p-3.5 sm:gap-5 sm:p-5 lg:grid-cols-[1fr_21rem] lg:gap-5 lg:p-6">
           {/* Column 1: Europe Cooked Index & Map Panel */}
-          <div className="flex flex-col gap-4 lg:gap-5 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:h-full">
+          <div className="flex flex-col gap-3.5 sm:gap-5 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:h-full">
             <EuropeCookedIndex />
-            <div className="min-h-[480px] lg:min-h-0 h-full flex-1">
+            <div className="min-h-[320px] sm:min-h-[480px] lg:min-h-0 h-full flex-1">
               <MapPanel />
             </div>
           </div>
 
           {/* Column 2: Buy me an Ice Creem & Right Rail */}
-          <div className="flex flex-col gap-4 lg:gap-5 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:h-full">
+          <div className="flex flex-col gap-3.5 sm:gap-5 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:h-full">
             <HeaderTools />
             <RightRail />
           </div>

@@ -12,7 +12,7 @@ export default function EuropeCookedIndex() {
   const totalSuffering = sufferingCount + ambientSufferingCount;
 
   return (
-    <div className="rounded-2xl border border-line bg-panel p-5 flex flex-col justify-between">
+    <div className="rounded-2xl border border-line bg-panel p-4 sm:p-5 flex flex-col justify-between">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="flex items-center gap-1.5 text-[13px] font-semibold uppercase tracking-wide text-ember">

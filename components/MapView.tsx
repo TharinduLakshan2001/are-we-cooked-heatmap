@@ -213,8 +213,10 @@ export default function MapView({
       minZoom={3}
       maxZoom={12}
       zoomControl={false}
-      className="h-full w-full"
-      style={{ minHeight: "480px" }}
+      className="h-full w-full min-h-[320px] sm:min-h-[480px]"
+      dragging={typeof window !== "undefined" ? window.innerWidth > 768 : true}
+      doubleClickZoom={false}
+      scrollWheelZoom={false}
     >
       {view === "heat" ? (
         <>

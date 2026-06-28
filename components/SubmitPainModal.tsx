@@ -214,7 +214,7 @@ export default function SubmitPainModal() {
         role="dialog"
         aria-modal="true"
         aria-label="Drop Your Suffering"
-        className="rise w-full max-w-lg rounded-2xl border border-line bg-panel shadow-2xl"
+        className="rise w-full max-w-lg rounded-2xl border border-line bg-panel shadow-2xl max-h-[90vh] overflow-y-auto"
       >
         {submitted ? (
           <div className="flex flex-col items-center gap-4 px-8 py-16 text-center">

@@ -10,7 +10,7 @@ import { useAmbient } from "@/lib/AmbientActivityContext";
 const MapView = dynamic(() => import("./MapView"), {
   ssr: false,
   loading: () => (
-    <div className="flex min-h-[480px] items-center justify-center rounded-2xl border border-line bg-[#0b0c12]">
+    <div className="flex min-h-[320px] sm:min-h-[480px] items-center justify-center rounded-2xl border border-line bg-[#0b0c12]">
       <div className="flex flex-col items-center gap-3">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-ember border-t-transparent" />
         <span className="text-[13px] text-mist">Loading map…</span>
@@ -27,7 +27,7 @@ export default function MapPanel() {
   const totalSuffering = sufferingCount + ambientSufferingCount;
 
   return (
-    <div className="flex h-full min-h-[480px] flex-col gap-3">
+    <div className="flex h-full min-h-[320px] sm:min-h-[480px] flex-col gap-3">
       {/* toggle */}
       <div className="inline-flex w-fit items-center gap-1 rounded-xl border border-line bg-panel p-1">
         <button

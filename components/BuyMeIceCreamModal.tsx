@@ -75,7 +75,7 @@ export default function BuyMeIceCreamModal() {
         role="dialog"
         aria-modal="true"
         tabIndex={-1}
-        className="rise relative w-full max-w-xl overflow-hidden rounded-2xl border border-line bg-panel shadow-2xl outline-none"
+        className="rise relative w-full max-w-xl overflow-y-auto rounded-2xl border border-line bg-panel shadow-2xl outline-none max-h-[90vh]"
       >
         {/* Close Button */}
         <button
