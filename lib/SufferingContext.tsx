@@ -87,6 +87,41 @@ export function SufferingProvider({ children }: { children: ReactNode }) {
 
   const submitEntry = useCallback(
     async ({ name, city, score, message, lat, lng, tempC, tiktokLink }: SubmitData): Promise<boolean> => {
+      const hasCreds =
+        process.env.NEXT_PUBLIC_SUPABASE_URL &&
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+      if (!hasCreds) {
+        console.warn("Supabase credentials missing — inserting locally");
+        const localEntry = {
+          id: `local-${Date.now()}`,
+          name,
+          flag: "📍",
+          city: city.label,
+          score,
+          message,
+          time: "Just now",
+          initial: name.charAt(0).toUpperCase(),
+          lat: lat ?? undefined,
+          lng: lng ?? undefined,
+          tempC: tempC ?? undefined,
+          tiktokLink: tiktokLink ?? undefined,
+        };
+        setLiveFeed((prev) => [localEntry, ...prev]);
+        setSufferingCount((prev) => prev + 1);
+
+        if (city.id) {
+          setCities((prev) =>
+            prev.map((c) =>
+              c.id === city.id
+                ? { ...c, percent: Math.min(99, c.percent + 0.2) }
+                : c,
+            ),
+          );
+        }
+        return true;
+      }
+
       const { data, error } = await supabase
         .from("submissions")
         .insert({
