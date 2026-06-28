@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import { fetchAllEuropeanWeather } from "@/lib/cityWeather";
 import { ChevronLeft, Flame, ShieldAlert } from "lucide-react";
 
+export const runtime = "edge";
+
 type CityParams = {
   slug: string;
 };

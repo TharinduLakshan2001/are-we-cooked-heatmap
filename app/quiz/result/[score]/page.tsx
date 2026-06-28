@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Flame, ArrowRight, RotateCcw } from "lucide-react";
 import ResultShareButton from "./ResultShareButton";
 
+export const runtime = "edge";
+
 type ResultParams = {
   score: string;
 };

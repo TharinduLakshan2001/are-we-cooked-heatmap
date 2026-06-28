@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 const OPEN_METEO_FORECAST = "https://api.open-meteo.com/v1/forecast";
 const OPEN_METEO_GEOCODE = "https://geocoding-api.open-meteo.com/v1/reverse";
 
+export const runtime = "edge";
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const lat = searchParams.get("lat");
