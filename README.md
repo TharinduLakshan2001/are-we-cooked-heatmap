@@ -117,3 +117,29 @@ Ghost pin fade-in animations and the leaderboard percent drift snap instantly (n
 - Avatars are generated initials (no external image hosting), so the app has zero mandatory third-party runtime dependencies (Leaflet tiles load from CDN at runtime).
 - The map uses Leaflet + react-leaflet, dynamically imported to avoid SSR issues (`ssr: false`). A spinning skeleton is shown while the map loads.
 - Built and lint-checked with `npm run build` / `npx eslint .` — both pass clean.
+
+## SEO Strategy & Marketing Infrastructure
+
+An expert-level, comprehensive SEO setup is implemented to drive both viral slang traffic (teens/social media) and high-intent informational weather traffic (adults).
+
+### 1. New SEO Routes
+- **`app/quiz/page.tsx` (`/quiz`)** — Satirical "Am I Cooked?" interactive multiple-choice quiz. Calculates a personalized cooked score.
+- **`app/quiz/result/[score]/page.tsx` (`/quiz/result/[score]`)** — Shareable, indexable result routes with server-side metadata and dynamically generated OG images.
+- **`app/cities/[slug]/page.tsx` (`/cities/[slug]`)** — Real-time weather, heat advisory ratings, and safety resources for European capitals.
+- **`app/heat-index/page.tsx` (`/heat-index`)** — Educational cluster guide explaining feels-like temperature vs air temperature.
+- **`app/heatwave-safety/page.tsx` (`/heatwave-safety`)** — Public-health aligned extreme heat guidance with medical disclaimers.
+- **`app/glossary/page.tsx` (`/glossary`)** — Satirical glossary explaining terms like "cooked", "sweat dance", and "heat check" to capture slang search terms.
+
+### 2. Metadata & Structured Data
+- **Organization Schema** — Rendered in the root layout to define "Am I Cooked" organization branding.
+- **BreadcrumbList Schema** — Rendered on `/quiz`, `/quiz/result/[score]`, `/cities/[slug]`, `/heat-index`, `/heatwave-safety`, and `/glossary` to improve search snippet formatting.
+- **FAQPage Schema** — Structured Q&A questions on the Heat Index and Heatwave Safety pages to capture rich search features (FAQs).
+- **Dynamic Open Graph Images** — Created dynamic image generators using `next/og` for `/quiz/result/[score]` and `/cities/[slug]` so link previews show customized result cards.
+
+### 3. Action Items for Deployments
+- **Social Media Placeholders** — In `app/layout.tsx`, update the `sameAs` array placeholders inside the `orgSchema` object with the official URLs for:
+  - TikTok: `https://www.tiktok.com/@amicooked`
+  - Twitter/X: `https://twitter.com/amicooked`
+  - Instagram: `https://www.instagram.com/amicooked`
+- **Sitemap submission** — Once deployed, resubmit the dynamic sitemap located at `[your-domain]/sitemap.xml` to Google Search Console to register the new guides and all 40+ city routes instantly.
+

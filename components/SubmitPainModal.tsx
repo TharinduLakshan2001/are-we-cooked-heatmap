@@ -197,7 +197,7 @@ export default function SubmitPainModal() {
 
       setSubmitting(false);
     },
-    [formValid, cityCoords, cityName, name, score, message, tiktokLink, submitEntry, closeModal, resetForm],
+    [formValid, cityCoords, cityName, name, score, message, tiktokLink, submitEntry, closeModal, resetForm, openIceCreamModal],
   );
 
   if (!isModalOpen) return null;

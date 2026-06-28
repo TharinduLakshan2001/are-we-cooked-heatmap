@@ -2,6 +2,7 @@
 
 import { useReducer, useState, useEffect, useRef, useCallback } from "react";
 import { X, Search, Trophy } from "lucide-react";
+import Link from "next/link";
 
 const RANK_MEDAL: Record<number, string> = { 1: "🥇", 2: "🥈", 3: "🥉" };
 
@@ -178,7 +179,11 @@ function LeaderRow({ city }: { city: LeaderEntry }) {
         <div className="flex items-center justify-between gap-2">
           <span className="flex min-w-0 items-center gap-1 truncate text-xs font-semibold">
             <span className="text-sm">{city.flag}</span>
-            <span className="truncate">{city.name}</span>
+            <span className="truncate">
+              <Link href={`/cities/${city.id}`} className="hover:underline hover:text-frost transition-colors cursor-pointer">
+                {city.name}
+              </Link>
+            </span>
           </span>
           <span className={`shrink-0 text-xs font-bold ${city.cold ? "text-frost" : "text-ember"}`}>
             {city.tempC.toFixed(1)}°C

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Trophy, ChevronRight } from "lucide-react";
 import LeaderboardModal from "./LeaderboardModal";
+import Link from "next/link";
 
 const RANK_MEDAL: Record<number, string> = { 1: "🥇", 2: "🥈", 3: "🥉" };
 
@@ -95,7 +96,9 @@ export default function LeaderboardCard() {
                   </span>
                   <span className="shrink-0 text-base">{c.flag}</span>
                   <span className="min-w-0 flex-1 truncate text-sm font-semibold text-ink">
-                    {c.name}
+                    <Link href={`/cities/${c.id}`} className="hover:underline hover:text-frost transition-colors cursor-pointer">
+                      {c.name}
+                    </Link>
                   </span>
                   <span
                     className={`shrink-0 text-sm font-bold ${

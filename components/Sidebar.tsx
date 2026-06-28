@@ -2,7 +2,6 @@
 
 import {
   Activity,
-  Trophy,
   PenSquare,
   Info,
   Flame,
@@ -10,73 +9,81 @@ import {
   X as XIcon,
   Camera,
   Link as LinkIcon,
+  HelpCircle,
 } from "lucide-react";
-import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSuffering } from "@/lib/SufferingContext";
 
 /* 👇 Placeholder URL — replace with the real official TikTok hashtag/page */
 export const SWEAT_DANCE_TIKTOK_URL = "https://www.tiktok.com/tag/sweatdance";
 
 export const NAV_ITEMS = [
-  { label: "Live Map", icon: Activity },
-  { label: "Leaderboard", icon: Trophy },
-  { label: "Submit Pain", icon: PenSquare },
-  { label: "Sweat Dance", icon: Music2 },
-  { label: "About", icon: Info },
+  { label: "Live Map", icon: Activity, href: "/" },
+  { label: "Am I Cooked? Quiz", icon: HelpCircle, href: "/quiz" },
+  { label: "Submit Pain", icon: PenSquare, action: "submit" },
+  { label: "Sweat Dance", icon: Music2, href: SWEAT_DANCE_TIKTOK_URL, external: true },
+  { label: "About", icon: Info, href: "/" },
 ];
 
 export default function Sidebar() {
-  const [active, setActive] = useState("Live Map");
+  const pathname = usePathname();
   const { openModal } = useSuffering();
 
   return (
     <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-line bg-panel/60 px-5 py-6">
       {/* Logo */}
-      <div className="flex items-center gap-2">
+      <Link href="/" className="flex items-center gap-2 cursor-pointer">
         <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ember to-crimson">
           <Flame size={18} className="text-white" />
         </span>
         <span className="font-display text-lg font-black tracking-tight">
           HEAT <span className="text-ember">MAP</span>
         </span>
-      </div>
+      </Link>
       <p className="mt-3 text-[13px] leading-snug text-mist">
         Where Europe is dying right now.
       </p>
 
       {/* Nav */}
       <nav className="mt-7 flex flex-col gap-1">
-        {NAV_ITEMS.map(({ label, icon: Icon }) => {
-          const isActive = label === active;
-          if (label === "Sweat Dance") {
+        {NAV_ITEMS.map(({ label, icon: Icon, href, external, action }) => {
+          const isActive =
+            (label === "Live Map" && pathname === "/") ||
+            (label === "Am I Cooked? Quiz" && pathname?.startsWith("/quiz"));
+
+          if (external) {
             return (
               <a
                 key={label}
-                href={SWEAT_DANCE_TIKTOK_URL}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors ${
-                  isActive
-                    ? "bg-gradient-to-r from-ember to-crimson text-white shadow-[0_0_24px_-6px_var(--ember)]"
-                    : "text-mist hover:bg-white/5 hover:text-ink"
-                }`}
+                className="group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors text-mist hover:bg-white/5 hover:text-ink"
               >
-                <Icon
-                  size={17}
-                  strokeWidth={isActive ? 2.4 : 2}
-                  className={isActive ? "" : "opacity-80"}
-                />
+                <Icon size={17} className="opacity-80" />
                 {label}
               </a>
             );
           }
+
+          if (action === "submit") {
+            return (
+              <button
+                key={label}
+                onClick={openModal}
+                className="group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors text-mist hover:bg-white/5 hover:text-ink cursor-pointer"
+              >
+                <Icon size={17} className="opacity-80" />
+                {label}
+              </button>
+            );
+          }
+
           return (
-            <button
+            <Link
               key={label}
-              onClick={() => {
-                setActive(label);
-                if (label === "Submit Pain") openModal();
-              }}
+              href={href || "/"}
               className={`group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors ${
                 isActive
                   ? "bg-gradient-to-r from-ember to-crimson text-white shadow-[0_0_24px_-6px_var(--ember)]"
@@ -89,7 +96,7 @@ export default function Sidebar() {
                 className={isActive ? "" : "opacity-80"}
               />
               {label}
-            </button>
+            </Link>
           );
         })}
       </nav>
@@ -110,7 +117,7 @@ export default function Sidebar() {
             <button
               key={i}
               aria-label="share"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-panel-2 text-mist transition-colors hover:border-ember/40 hover:text-ember"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-panel-2 text-mist transition-colors hover:border-ember/40 hover:text-ember cursor-pointer"
             >
               <Icon size={14} />
             </button>
